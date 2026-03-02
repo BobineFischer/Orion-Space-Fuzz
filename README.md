@@ -11,6 +11,8 @@ Designed as a sonic tribute to the legendary bass tone of Cliff Burton (specific
 
 This project was developed to demonstrate core principles of Digital Signal Processing (DSP), memory-safe real-time C++ programming, and physical acoustic modeling.
 
+**[Listen to the Demo on Google Drive](https://drive.google.com/drive/folders/1NWYN5n1tv_qc0ChV5jGWdoW4HpwiJi7s?usp=sharing)**
+
 ---
 
 ## Parameters & UI Guide
