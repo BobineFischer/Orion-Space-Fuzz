@@ -1,4 +1,4 @@
-# Orion Space Fuzz 🎸🌌
+# Orion Space Fuzz
 
 ![Format](https://img.shields.io/badge/Format-VST3%20%2F%20AU%20%2F%20Standalone-blue)
 ![C++](https://img.shields.io/badge/Language-C++17-00599C?logo=c%2B%2B)
