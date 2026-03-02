@@ -1,4 +1,4 @@
-# Orion Space Fuzz
+# Orion Space Fuzz 🎸🌌
 
 ![Format](https://img.shields.io/badge/Format-VST3%20%2F%20AU%20%2F%20Standalone-blue)
 ![C++](https://img.shields.io/badge/Language-C++17-00599C?logo=c%2B%2B)
@@ -15,19 +15,25 @@ This project was developed to demonstrate core principles of Digital Signal Proc
 
 ## Parameters & UI Guide
 
-The graphical user interface features a 2x3 grid of controls, allowing deep manipulation of the signal chain:
+The graphical user interface features a 2x3 grid of controls. Here are the specific ranges, units, and DSP functions for each parameter:
 
-### Fuzz Stage
-* **Fuzz Drive**: Controls the input gain fed into the non-linear waveshaper. Higher values aggressively square off the waveform, creating rich, harsh even and odd harmonics.
+### Fuzz Stage (Non-linear Distortion)
+* **Fuzz Drive `[Range: 1.0 to 20.0]`**: Controls the input gain fed into the non-linear waveshaper. 
+  * *Function*: A value of 1.0 acts essentially as a bypass (linear). As the value approaches 20.0, the signal is driven aggressively into the $\tanh$ function, squaring off the waveform and creating rich, harsh harmonic overtones.
 
-### Chorus Stage
-* **Chorus Rate**: Adjusts the frequency of the Low-Frequency Oscillator (LFO) that modulates the delayed signal in the chorus block, determining the "speed" of the swirl.
-* **Chorus Depth**: Controls the amplitude of the LFO, determining how wide the pitch modulation fluctuates.
+### Chorus Stage (Modulation)
+* **Chorus Rate `[Range: 0.1 Hz to 10.0 Hz]`**: Adjusts the oscillation frequency of the LFO (Low-Frequency Oscillator).
+  * *Function*: Determines the "speed" of the chorus swirl. Lower values (e.g., 0.5 Hz) create a slow, sweeping spatial effect, while higher values create a fast, vibrato-like flutter.
+* **Chorus Depth `[Range: 0.0 to 1.0]`**: Controls the amplitude of the LFO.
+  * *Function*: Determines how wide the pitch modulation fluctuates. `0.0` yields no modulation, while `1.0` pushes the Doppler shift to its maximum width.
 
-### Delay Stage
-* **Delay Time**: The time offset (in milliseconds) between the original signal and the echo.
-* **Feedback**: The percentage of the delayed signal fed back into the input of the delay line. Higher values create nearly infinite, self-oscillating spatial echoes.
-* **Delay Mix**: The linear crossfade between the dry signal (Fuzz + Chorus) and the wet signal (Delay).
+### Delay Stage (Spatial Echo)
+* **Delay Time `[Range: 0.0 ms to 2000.0 ms]`**: The time offset between the original signal and the echo.
+  * *Function*: Converted internally to sample offsets based on the host's sample rate. Allows for everything from instantaneous comb-filtering to massive 2-second canyon echoes.
+* **Feedback `[Range: 0.0 to 0.95]`**: The recursive gain coefficient of the delay line.
+  * *Function*: Determines how many times the echo repeats. **Note**: It is strictly capped at `0.95` to ensure the IIR (Infinite Impulse Response) filter remains stable and to prevent dangerous digital self-oscillation (clipping) above `1.0`.
+* **Delay Mix `[Range: 0.0 to 1.0]`**: The linear crossfade amount.
+  * *Function*: `0.0` outputs 100% Dry signal (Fuzz + Chorus only), while `1.0` outputs 100% Wet signal (only the delayed echoes). A standard setting is `0.5` for equal blending.
 
 ---
 
